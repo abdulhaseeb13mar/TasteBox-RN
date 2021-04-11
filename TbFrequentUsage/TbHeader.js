@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-import {colors} from './DzColor';
-import {H_W} from './DzDim';
+import {colors} from './TbColor';
+import {H_W} from './TbResponsive';
 import {Badge} from 'react-native-elements';
 import {connect} from 'react-redux';
 

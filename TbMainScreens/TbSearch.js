@@ -1,22 +1,28 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import WrapperScreen from '../DzComp/DzWrapperScreen';
-import {H_W} from '../DzComp/DzDim';
-import NavigationRef from '../DzComp/DzRefNavigation';
-import Entypo from 'react-native-vector-icons/Entypo';
-import {colors} from '../DzComp/DzColor';
-import Data from '../DzData';
-import Loop from '../DzComp/DzFlatList';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
+import {H_W} from '../TbFrequentUsage/TbResponsive';
+import WrapperScreen from '../TbFrequentUsage/TbWrapperScreen';
+import NavigationRef from '../TbFrequentUsage/TbRefNavigation';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
+import {colors} from '../TbFrequentUsage/TbColor';
+import Data from '../TbData';
+import Loop from '../TbFrequentUsage/TbFlatList';
 import {connect} from 'react-redux';
 import {
   DzsetCurrentProductAction,
   DzsetFavAction,
   DzremoveFavAction,
-} from '../DzRedux/DzActions';
+} from '../TbStateManagement/TbActions';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import DzSearchBar from '../DzComp/DzSearchBar';
-import DzHeader from '../DzComp/DzHeader';
 import {DzVerticalTile} from './TbHome';
 
 function Search(props) {
@@ -27,7 +33,7 @@ function Search(props) {
 
   const RenderSearchedResult = () => {
     var SearchedItems = Data.product.filter((item) =>
-      item.productName.toLowerCase().includes(searchText.toLowerCase()),
+      item.name.toLowerCase().includes(searchText.toLowerCase()),
     );
     return SearchedItems.length === 0 ? (
       <Text style={{fontWeight: 'bold', textAlign: 'center'}}>
@@ -46,7 +52,6 @@ function Search(props) {
   const CardRender = (Arr) => {
     return (
       <Loop
-        numColumns={2}
         horizontal={false}
         data={Arr}
         renderItem={({item}) => (
@@ -67,13 +72,41 @@ function Search(props) {
   return (
     <WrapperScreen style={{backgroundColor: 'white'}}>
       <View style={styles.DzSearch1}>
-        <DzHeader
-          leftIcon={Entypo}
-          leftIconName="chevron-left"
-          leftIconColor={colors.primary}
-          leftIconAction={DzGoBack}
-          Title={<Text style={styles.DzSearch2}>Search</Text>}
-        />
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingHorizontal: H_W.width * 0.04,
+            marginVertical: HEIGHT * 0.015,
+          }}>
+          <TouchableOpacity
+            onPress={DzGoBack}
+            style={{
+              borderColor: colors.lightGrey3,
+              borderWidth: 1,
+              paddingHorizontal: H_W.width * 0.02,
+              paddingVertical: HEIGHT * 0.01,
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderTopLeftRadius: 13,
+              borderBottomRightRadius: 13,
+            }}>
+            <Ionicons name="chevron-back" color={colors.primary} size={22} />
+          </TouchableOpacity>
+          <Text style={styles.DzSearch2}>Search</Text>
+          <View
+            style={{
+              paddingHorizontal: H_W.width * 0.02,
+              paddingVertical: HEIGHT * 0.01,
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderTopLeftRadius: 13,
+              borderBottomRightRadius: 13,
+            }}>
+            <Feather name="shopping-bag" color="white" size={22} />
+          </View>
+        </View>
         <View style={styles.DzSearch3}>
           <View
             style={{
@@ -81,7 +114,32 @@ function Search(props) {
               marginBottom: -HEIGHT * 0.02,
               ...styles.DzSearch4,
             }}>
-            <DzSearchBar changeSearchText={DzchangeSearchText} />
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                paddingHorizontal: H_W.width * 0.03,
+                paddingVertical: HEIGHT * 0.015,
+                borderColor: colors.lightGrey3,
+                borderWidth: 1,
+                width: '100%',
+                borderTopLeftRadius: 20,
+                borderBottomRightRadius: 20,
+              }}>
+              <AntDesign name="search1" size={18} color={colors.primary} />
+              <TextInput
+                style={{
+                  marginLeft: H_W.width * 0.02,
+                  width: '90%',
+                  fontWeight: 'bold',
+                  fontSize: 16,
+                  color: 'black',
+                }}
+                placeholderTextColor={colors.lightGrey3}
+                placeholder="Search Here..."
+                onChangeText={DzchangeSearchText}
+              />
+            </View>
           </View>
         </View>
       </View>
@@ -104,7 +162,6 @@ export default connect(mapStateToProps, {
 
 const styles = StyleSheet.create({
   DzSearch1: {
-    // backgroundColor: colors.primary,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
   },
@@ -127,6 +184,4 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 17.11,
   },
-  DzSearch5: {},
-  DzSearch6: {},
 });

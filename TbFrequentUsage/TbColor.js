@@ -12,6 +12,7 @@ export const colors = {
   darkPink: '#866766',
   orange: '#fa6c1c',
   lightBackground2: '#d9e0e3',
+  charcoal: '#606060',
 };
 
 export const textFont = {

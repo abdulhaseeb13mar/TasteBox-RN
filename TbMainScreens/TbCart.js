@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import {
   DzremoveCartAction,
@@ -9,18 +9,20 @@ import {
   DzsetFavAction,
   DzremoveFavAction,
   DzresetCart,
-} from '../DzRedux/DzActions';
-import WrapperScreen from '../DzComp/DzWrapperScreen';
+} from '../TbStateManagement/TbActions';
+import WrapperScreen from '../TbFrequentUsage/TbWrapperScreen';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {colors} from '../DzComp/DzColor';
-import {H_W} from '../DzComp/DzDim';
-import RefNavigation from '../DzComp/DzRefNavigation';
-import Entypo from 'react-native-vector-icons/Entypo';
-import {Button} from 'react-native-elements';
+import {colors} from '../TbFrequentUsage/TbColor';
+import {H_W} from '../TbFrequentUsage/TbResponsive';
+import RefNavigation from '../TbFrequentUsage/TbRefNavigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import {DzVerticalTile} from './TbHome';
-import Loop from '../DzComp/DzFlatList';
-import UseHeader from '../DzComp/DzHeader';
-import DzItemCounterWrapper from '../DzComp/DzItemCounterWrapper';
+import CartBottomShapeSvg from '../AllAssets/Images/CartBottomShape';
+import Loop from '../TbFrequentUsage/TbFlatList';
+import DzItemCounterWrapper from '../TbFrequentUsage/TbItemCounterWrapper';
+import EmptyCart from '../AllAssets/UtilityAssets/emptyCart.png';
+import FastImage from 'react-native-fast-image';
 
 export const Cart = (props) => {
   useEffect(() => {
@@ -47,82 +49,187 @@ export const Cart = (props) => {
     props.DzsetCurrentProductAction(item);
     RefNavigation.Navigate('DzSP');
   };
-  const DzinfoScreen = () => RefNavigation.Navigate('DzContact');
+  const DzinfoScreen = () =>
+    props.DzTotalItems > 0 && RefNavigation.Navigate('DzContact');
 
   return (
-    <WrapperScreen style={{backgroundColor: 'white'}}>
-      <View style={styles.DzCart1}>
-        <UseHeader
-          leftIcon={Entypo}
-          leftIconName="chevron-left"
-          leftIconColor={colors.primary}
-          leftIconAction={DzGoBack}
-          Title={<Text style={styles.DzCart2}>Cart</Text>}
-        />
-        <View
-          style={{
-            paddingVertical: HEIGHT * 0.01,
-            // marginBottom: -HEIGHT * 0.02,
-            ...styles.DzCart3,
-          }}>
-          <View style={styles.DzCart4}>
-            <Text style={{fontWeight: 'bold'}}>Total:</Text>
-            <Text style={{fontWeight: 'bold'}}>${props.DzTotal}</Text>
-          </View>
-          <View style={styles.DzCart5}>
-            <Text>Items:</Text>
-            <Text>{props.DzTotalItems}</Text>
-          </View>
-        </View>
-      </View>
-      <View style={{flex: 1}}>
-        <Loop
-          numColumns={2}
-          horizontal={false}
-          data={HorizontalCartArray}
-          renderItem={({item}) => (
-            <DzItemCounterWrapper
-              position="top"
-              Counterlength={HEIGHT * 0.15}
-              style={{marginTop: HEIGHT * 0.05}}
-              item={item}
-              counterColor={colors.primary}
-              counterContentColor={'white'}>
-              <DzVerticalTile
-                item={item}
-                DzGoToSingleProduct={DzGoToSingleProduct}
-                DzFavs={props.DzFavs}
-                DzsetFav={(fd) => props.DzsetFavAction(fd)}
-                DzremoveFav={(fd) => props.DzremoveFavAction(fd)}
-              />
-            </DzItemCounterWrapper>
-          )}
-        />
-      </View>
+    <WrapperScreen
+      style={{backgroundColor: `rgba(${colors.rgb_Primary},0.1)`}}
+      statusColor={`rgba(${colors.rgb_Primary},0.1)`}>
       <View
         style={{
+          flexDirection: 'row',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'space-between',
+          paddingHorizontal: H_W.width * 0.04,
+          marginVertical: HEIGHT * 0.015,
         }}>
-        <Button
-          raised
-          onPress={DzinfoScreen}
-          title="Proceed to Checkout"
-          titleStyle={{fontWeight: 'bold', fontSize: 18}}
-          containerStyle={{width: '80%', borderRadius: 50}}
-          buttonStyle={{
-            borderRadius: 50,
-            paddingVertical: HEIGHT * 0.02,
-            backgroundColor: colors.primary,
-            shadowColor: colors.primary,
+        <TouchableOpacity
+          onPress={DzGoBack}
+          style={{
+            borderColor: colors.lightGrey3,
+            borderWidth: 1,
+            paddingHorizontal: H_W.width * 0.02,
+            paddingVertical: HEIGHT * 0.01,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderTopLeftRadius: 13,
+            borderBottomRightRadius: 13,
+          }}>
+          <Ionicons name="chevron-back" color={colors.primary} size={22} />
+        </TouchableOpacity>
+        <Text style={{fontWeight: 'bold', fontSize: 20, color: colors.primary}}>
+          Cart
+        </Text>
+        <View
+          style={{
+            paddingHorizontal: H_W.width * 0.02,
+            paddingVertical: HEIGHT * 0.01,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderTopLeftRadius: 13,
+            borderBottomRightRadius: 13,
+          }}>
+          <Feather
+            name="shopping-bag"
+            color={`rgba(${colors.rgb_Primary},0)`}
+            size={22}
+          />
+        </View>
+      </View>
+      <View style={{flex: 1, paddingBottom: HEIGHT * 0.1}}>
+        {props.DzTotalItems > 0 ? (
+          <Loop
+            horizontal={false}
+            data={HorizontalCartArray}
+            renderItem={({item}) => (
+              <DzItemCounterWrapper
+                position="top"
+                Counterlength={HEIGHT * 0.15}
+                style={{marginTop: HEIGHT * 0.05}}
+                item={item}
+                counterColor={colors.primary}
+                counterContentColor={'white'}>
+                <DzVerticalTile
+                  item={item}
+                  DzGoToSingleProduct={DzGoToSingleProduct}
+                  DzFavs={props.DzFavs}
+                  DzsetFav={(fd) => props.DzsetFavAction(fd)}
+                  DzremoveFav={(fd) => props.DzremoveFavAction(fd)}
+                />
+              </DzItemCounterWrapper>
+            )}
+          />
+        ) : (
+          <View
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              flex: 1,
+            }}>
+            <View
+              style={{
+                shadowColor: '#606060',
+                shadowOffset: {
+                  width: 0,
+                  height: 5,
+                },
+                shadowOpacity: 0.36,
+                shadowRadius: 6.68,
+              }}>
+              <FastImage
+                source={EmptyCart}
+                style={{
+                  width: H_W.width * 0.7,
+                  height: HEIGHT * 0.35,
+                }}
+                resizeMode="contain"
+              />
+            </View>
+            <Text
+              style={{
+                color: colors.charcoal,
+                opacity: 0.7,
+                fontWeight: 'bold',
+                fontSize: 25,
+                marginTop: HEIGHT * 0.02,
+              }}>
+              Mr. Cart is empty!
+            </Text>
+          </View>
+        )}
+      </View>
+      <View style={{position: 'absolute', bottom: 0}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            position: 'absolute',
+            bottom: HEIGHT * 0.007 + insets.bottom,
+            width: H_W.width,
+            paddingHorizontal: H_W.width * 0.07,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <Text style={{fontFamily: 'AvenirNext-Regular'}}>
+              TOTAL AMOUNT:{'   '}
+            </Text>
+            <Text
+              style={{
+                fontWeight: 'bold',
+                fontFamily: 'AvenirNextCondensed-HeavyItalic',
+                fontSize: 17,
+              }}>
+              $ {props.DzTotal}
+            </Text>
+          </View>
+          <TouchableOpacity
+            onPress={DzinfoScreen}
+            style={{
+              backgroundColor: colors.charcoal,
+              paddingHorizontal: H_W.width * 0.05,
+              paddingVertical: HEIGHT * 0.007,
+              borderTopLeftRadius: 18,
+              borderBottomRightRadius: 18,
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 3,
+              },
+              shadowOpacity: 0.29,
+              shadowRadius: 4.65,
+            }}>
+            <Text
+              style={{
+                color: 'white',
+                fontWeight: 'bold',
+                fontSize: 19,
+                textAlign: 'center',
+                fontStyle: 'italic',
+                fontFamily: 'AvenirNextCondensed-HeavyItalic',
+              }}>
+              CHECKOUT
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            shadowColor: '#606060',
             shadowOffset: {
               width: 0,
-              height: 8,
+              height: -7,
             },
-            shadowOpacity: 0.46,
-            shadowRadius: 11.14,
-          }}
-        />
+            shadowOpacity: 0.21,
+            shadowRadius: 6.11,
+            zIndex: -1,
+          }}>
+          <CartBottomShapeSvg width={H_W.width} height={HEIGHT * 0.24} />
+        </View>
       </View>
     </WrapperScreen>
   );
@@ -143,40 +250,3 @@ export default connect(mapStateToProps, {
   DzremoveFavAction,
   DzresetCart,
 })(Cart);
-
-const styles = StyleSheet.create({
-  DzCart1: {
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-    alignItems: 'center',
-  },
-  DzCart2: {
-    color: colors.primary,
-    fontSize: 22,
-  },
-  DzCart3: {
-    backgroundColor: 'white',
-    width: '80%',
-    borderRadius: 10,
-    paddingHorizontal: H_W.width * 0.03,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 17.11,
-  },
-  DzCart4: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  DzCart5: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  DzCart6: {},
-  DzCart7: {},
-});

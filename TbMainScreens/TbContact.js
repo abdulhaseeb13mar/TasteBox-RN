@@ -1,19 +1,25 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {Text, View, StyleSheet, TextInput} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import {connect} from 'react-redux';
-import WrapperScreen from '../DzComp/DzWrapperScreen';
+import WrapperScreen from '../TbFrequentUsage/TbWrapperScreen';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {H_W} from '../DzComp/DzDim';
-import {colors} from '../DzComp/DzColor';
+import {H_W} from '../TbFrequentUsage/TbResponsive';
+import {colors} from '../TbFrequentUsage/TbColor';
 import {Button, Overlay} from 'react-native-elements';
-import Entypo from 'react-native-vector-icons/Entypo';
+import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {isFormValid} from '../DzComp/Dzvalidation';
-import NavPointer from '../DzComp/DzRefNavigation';
-import {DzUserAction, DzresetCart} from '../DzRedux/DzActions';
+import {isFormValid} from '../TbFrequentUsage/Tbvalidation';
+import NavPointer from '../TbFrequentUsage/TbRefNavigation';
+import {DzUserAction, DzresetCart} from '../TbStateManagement/TbActions';
 import Toast from 'react-native-root-toast';
-import UseHeader from '../DzComp/DzHeader';
+import TabUnderline from '../AllAssets/Images/TabUnderlineSvg';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const ConfirmOrder = (props) => {
@@ -35,7 +41,11 @@ const ConfirmOrder = (props) => {
     if (!formValidResponse.status) {
       errorMsgHandler(formValidResponse.errCategory, formValidResponse.errMsg);
     } else {
-      CallApi();
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        MoveToConfirmOrder();
+      }, 2000);
       props.DzUserAction({
         email: email,
         firstName: firstName,
@@ -125,13 +135,44 @@ const ConfirmOrder = (props) => {
   return (
     <WrapperScreen style={{backgroundColor: 'white'}}>
       <KeyboardAwareScrollView style={styles.container} bounces={false}>
-        <UseHeader
-          leftIcon={Entypo}
-          leftIconName="chevron-left"
-          leftIconColor={colors.primary}
-          leftIconAction={DzGoBack}
-          Title={<Text style={styles.DzContact2}>Contact Info</Text>}
-        />
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingHorizontal: H_W.width * 0.04,
+            marginVertical: HEIGHT * 0.015,
+          }}>
+          <TouchableOpacity
+            onPress={DzGoBack}
+            style={{
+              borderColor: colors.lightGrey3,
+              borderWidth: 1,
+              paddingHorizontal: H_W.width * 0.02,
+              paddingVertical: HEIGHT * 0.01,
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderTopLeftRadius: 13,
+              borderBottomRightRadius: 13,
+            }}>
+            <Ionicons name="chevron-back" color={colors.primary} size={22} />
+          </TouchableOpacity>
+          <Text
+            style={{fontWeight: 'bold', fontSize: 20, color: colors.primary}}>
+            Checkout
+          </Text>
+          <View
+            style={{
+              paddingHorizontal: H_W.width * 0.02,
+              paddingVertical: HEIGHT * 0.01,
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderTopLeftRadius: 13,
+              borderBottomRightRadius: 13,
+            }}>
+            <Feather name="shopping-bag" color="white" size={22} />
+          </View>
+        </View>
         <View style={styles.DzPersonalInfoWrapper}>
           <View style={styles.DzSinglePersonalInfoWrapper}>
             <Text
@@ -149,6 +190,9 @@ const ConfirmOrder = (props) => {
                 placeholderTextColor={colors.lightGrey3}
               />
             </View>
+            <View>
+              <TabUnderline width={H_W.width * 0.77} height={HEIGHT * 0.01} />
+            </View>
           </View>
           <View style={styles.DzSinglePersonalInfoWrapper}>
             <Text
@@ -165,6 +209,9 @@ const ConfirmOrder = (props) => {
                 onChangeText={changeEmail}
                 placeholderTextColor={colors.lightGrey3}
               />
+            </View>
+            <View>
+              <TabUnderline width={H_W.width * 0.77} height={HEIGHT * 0.01} />
             </View>
           </View>
           <View style={styles.DzSinglePersonalInfoWrapper}>
@@ -184,6 +231,9 @@ const ConfirmOrder = (props) => {
                 placeholderTextColor={colors.lightGrey3}
               />
             </View>
+            <View>
+              <TabUnderline width={H_W.width * 0.77} height={HEIGHT * 0.01} />
+            </View>
           </View>
           <View style={styles.DzSinglePersonalInfoWrapper}>
             <Text
@@ -201,6 +251,9 @@ const ConfirmOrder = (props) => {
                 multiline
                 placeholderTextColor={colors.lightGrey3}
               />
+            </View>
+            <View>
+              <TabUnderline width={H_W.width * 0.77} height={HEIGHT * 0.01} />
             </View>
           </View>
         </View>
@@ -252,13 +305,22 @@ const ConfirmOrder = (props) => {
             onPress={DzConfirm}
             disabled={props.DzTotalItems === 0}
             title="CONFIRM ORDER"
-            titleStyle={{fontWeight: 'bold', fontSize: 20}}
-            containerStyle={{width: '80%', borderRadius: 50}}
+            titleStyle={{
+              fontWeight: 'bold',
+              fontSize: 20,
+              fontFamily: 'AvenirNextCondensed-HeavyItalic',
+            }}
+            containerStyle={{
+              width: '90%',
+              borderTopLeftRadius: 20,
+              borderBottomRightRadius: 20,
+            }}
             buttonStyle={{
-              borderRadius: 50,
+              borderTopLeftRadius: 20,
+              borderBottomRightRadius: 20,
               paddingVertical: HEIGHT * 0.02,
-              backgroundColor: colors.primary,
-              shadowColor: colors.primary,
+              backgroundColor: colors.charcoal,
+              shadowColor: '#606060',
               shadowOffset: {
                 width: 0,
                 height: 8,
@@ -315,7 +377,8 @@ const styles = StyleSheet.create({
   DzSm1: {
     width: '85%',
     backgroundColor: `rgba(${colors.rgb_Primary}, 0.3)`,
-    borderRadius: 18,
+    borderTopLeftRadius: 18,
+    borderBottomRightRadius: 18,
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: {

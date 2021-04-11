@@ -2,10 +2,13 @@
 import React from 'react';
 import {View, TouchableOpacity, StyleSheet, Text} from 'react-native';
 import {connect} from 'react-redux';
-import {H_W} from './DzDim';
+import {H_W} from '../TbFrequentUsage/TbResponsive';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {DzaddCartAction, DzremoveCartAction} from '../DzRedux/DzActions';
+import {
+  DzaddCartAction,
+  DzremoveCartAction,
+} from '../TbStateManagement/TbActions';
 
 const ItemCounterWrapper = ({style, position, Counterlength, ...props}) => {
   return (

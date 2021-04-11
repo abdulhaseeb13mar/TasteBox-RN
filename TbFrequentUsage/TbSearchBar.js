@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {H_W} from './DzDim';
+import {H_W} from './TbResponsive';
 import {colors} from './TbColor';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 

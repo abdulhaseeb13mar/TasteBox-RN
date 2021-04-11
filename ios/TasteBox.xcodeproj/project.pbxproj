@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* TasteBoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TasteBoxTests.m */; };
+		0F6E7AC02623A627001ECBD3 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F6E7ABF2623A627001ECBD3 /* BootSplash.storyboard */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -16,7 +17,6 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* TasteBoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TasteBoxTests.m */; };
 		621C8811BC96D38A9E9027FB /* libPods-TasteBox-TasteBoxTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B9EC4894D0186314B356851 /* libPods-TasteBox-TasteBoxTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		95EC9FDFE54AA9F19B100B64 /* libPods-TasteBox-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94474E591E30D35A4685D6B7 /* libPods-TasteBox-tvOSTests.a */; };
 		96F68078C7AFF9E1CB086847 /* libPods-TasteBox-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35ECFC5D09E49B0018320499 /* libPods-TasteBox-tvOS.a */; };
 		A750843E849C99E075C4C172 /* libPods-TasteBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 041245A7DA98A87DBEDF13B9 /* libPods-TasteBox.a */; };
@@ -46,6 +46,7 @@
 		00E356F21AD99517003FC87E /* TasteBoxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TasteBoxTests.m; sourceTree = "<group>"; };
 		02060C3408B941DA95680922 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		041245A7DA98A87DBEDF13B9 /* libPods-TasteBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TasteBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F6E7ABF2623A627001ECBD3 /* BootSplash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BootSplash.storyboard; sourceTree = "<group>"; };
 		12E35F16B5CD40BFBD17D314 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* TasteBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TasteBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = TasteBox/AppDelegate.h; sourceTree = "<group>"; };
@@ -67,7 +68,6 @@
 		65E388DA615CF35DBAD74B03 /* Pods-TasteBox-TasteBoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TasteBox-TasteBoxTests.debug.xcconfig"; path = "Target Support Files/Pods-TasteBox-TasteBoxTests/Pods-TasteBox-TasteBoxTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6C605332343547A88ADBB5FB /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		720F26B83BBC41DD83AA4DBF /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = TasteBox/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86BFD4733C071095FF01E591 /* Pods-TasteBox-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TasteBox-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-TasteBox-tvOSTests/Pods-TasteBox-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		91499D8A45DF4C5986301B61 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		94474E591E30D35A4685D6B7 /* libPods-TasteBox-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TasteBox-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,8 +146,8 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				0F6E7ABF2623A627001ECBD3 /* BootSplash.storyboard */,
 			);
 			name = TasteBox;
 			sourceTree = "<group>";
@@ -381,7 +381,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				0F6E7AC02623A627001ECBD3 /* BootSplash.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
