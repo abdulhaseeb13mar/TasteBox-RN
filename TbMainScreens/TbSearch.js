@@ -23,6 +23,8 @@ import {
   DzremoveFavAction,
 } from '../TbStateManagement/TbActions';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import FastImage from 'react-native-fast-image';
+import SadMagnify from '../AllAssets/UtilityAssets/sadMagnify.png';
 import {DzVerticalTile} from './TbHome';
 
 function Search(props) {
@@ -36,9 +38,48 @@ function Search(props) {
       item.name.toLowerCase().includes(searchText.toLowerCase()),
     );
     return SearchedItems.length === 0 ? (
-      <Text style={{fontWeight: 'bold', textAlign: 'center'}}>
-        Nothing Found...
-      </Text>
+      <View
+        style={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: HEIGHT * 0.7,
+        }}>
+        <View
+          style={{
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 5,
+            },
+            shadowOpacity: 0.46,
+            shadowRadius: 6.68,
+            alignItems: 'center',
+            justifyContent: 'center',
+            opacity: 0.9,
+          }}>
+          <FastImage
+            source={SadMagnify}
+            style={{
+              width: H_W.width * 0.7,
+              height: HEIGHT * 0.35,
+              transform: [{rotate: '-30deg'}],
+            }}
+            resizeMode="contain"
+          />
+        </View>
+        <Text
+          style={{
+            fontWeight: 'bold',
+            color: colors.charcoal,
+            fontSize: 25,
+            textAlign: 'center',
+            width: H_W.width * 0.9,
+            marginTop: 15,
+            fontFamily: 'AvenirNextCondensed-HeavyItalic',
+          }}>
+          SORRY! NO FOOD FOUND
+        </Text>
+      </View>
     ) : (
       CardRender(SearchedItems)
     );
